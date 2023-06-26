@@ -10,6 +10,8 @@ import java.net.Socket;
 
 import com.demus.common.catalina.Response;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
+
 import lombok.extern.slf4j.Slf4j;
 
 /*
@@ -82,6 +84,11 @@ public class ProcessRequestTask implements Runnable{
     }
 
     private Response processRequest(Request request) {
+        assert request.getRMethod() != null;
+        String methodName = request.getRMethod().getMethodName();
+        Class<?> interfaceName = request.getRMethod().getInterfaceName();
+        List<Class<?>> typeList = request.getRMethod().getTypeList();
+
         // 接口名、方法名、参数列表
         return null;
     }

@@ -9,6 +9,8 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.Executor;
+
 import lombok.extern.slf4j.Slf4j;
 
 /*
@@ -23,11 +25,13 @@ public class ServerMain {
         int serverPort = 9629;
         ServerSocket ss = new ServerSocket(serverPort);
         log.info("waiting for connection on serverPort {}", serverPort);
+        Executor threadPool = ThreadPoolUtil.getProcessRequestThreadPool();
         while (true) {
             Socket socket = ss.accept();
             log.info("client:{} connected", socket.getInetAddress().getHostName());
             ProcessRequestTask processRequestTask = new ProcessRequestTask(socket);
-            new Thread(processRequestTask).start();
+//            new Thread(processRequestTask).start();
+            threadPool.execute(processRequestTask);
         }
     }
 

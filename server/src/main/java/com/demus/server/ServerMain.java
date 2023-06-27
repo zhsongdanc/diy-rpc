@@ -24,6 +24,8 @@ import lombok.extern.slf4j.Slf4j;
 public class ServerMain {
 
     public static void main(String[] args) throws  Exception{
+        RpcServer rpcServer = new SocketServer(9629);
+        rpcServer.start();
         int serverPort = 9629;
         ServerSocket ss = new ServerSocket(serverPort);
         log.info("waiting for connection on serverPort {}", serverPort);

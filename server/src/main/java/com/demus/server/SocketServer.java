@@ -1,6 +1,7 @@
 package com.demus.server;
 
 
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -11,16 +12,26 @@ import java.net.Socket;
  */
 public class SocketServer extends RpcServer{
 
-    private ServerSocket serverSocket;
 
-    public SocketServer(int port) {
-        this.serviceProvider = new ServiceProvider();
+    private int port;
+    private ServiceRegistry serviceRegistry;
+
+    public SocketServer(int port) throws IOException {
+        this.port = port;
+//        this.serviceProvider = new ServiceProvider();
 //        this.serviceRegistry = new ServiceRegistry();
 
     }
 
     @Override
-    protected void start() throws RuntimeException {
+    protected void start() throws Exception {
+        try (ServerSocket serverSocket = new ServerSocket(port)) {
+            Socket socket;
+            while ((socket = serverSocket.accept()) != null) {
 
+            }
+        }
     }
+
+
 }

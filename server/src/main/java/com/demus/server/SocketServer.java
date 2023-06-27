@@ -15,7 +15,7 @@ public class SocketServer extends RpcServer{
 
     public SocketServer(int port) {
         this.serviceProvider = new ServiceProvider();
-        this.serviceRegistry = new ServiceRegistry();
+//        this.serviceRegistry = new ServiceRegistry();
 
     }
 

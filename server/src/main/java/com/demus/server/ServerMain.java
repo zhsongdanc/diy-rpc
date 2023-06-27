@@ -1,5 +1,6 @@
 package com.demus.server;
 
+import com.demus.common.annota.MyServiceScan;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
@@ -19,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
  * @Date: 2023/6/21 11:20
  */
 @Slf4j
+@MyServiceScan
 public class ServerMain {
 
     public static void main(String[] args) throws  Exception{

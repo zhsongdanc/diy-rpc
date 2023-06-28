@@ -1,5 +1,6 @@
 package com.demus.common.serialize.protostuff;
 
+import com.demus.common.serialize.Serializer;
 import io.protostuff.LinkedBuffer;
 import io.protostuff.ProtostuffIOUtil;
 import io.protostuff.runtime.RuntimeSchema;
@@ -9,9 +10,9 @@ import io.protostuff.runtime.RuntimeSchema;
  * @Description:
  * @Date: 2023/6/21 12:17
  */
-public class ProtostuffUtil {
+public class ProtostuffUtil implements Serializer {
 
-    public static <T> byte[] serialize(T obj) {
+    public  <T> byte[] serialize(T obj) {
         if (obj == null) {
             throw new IllegalArgumentException("obj cannot be null");
         }
@@ -31,7 +32,7 @@ public class ProtostuffUtil {
      * @param clazz 要反序列化的对象类型
      * @return 反序列化后的对象
      */
-    public static <T> T deserialize(byte[] data, Class<T> clazz) {
+    public  <T> T deserialize(byte[] data, Class<T> clazz) {
         if (data == null || data.length == 0) {
             throw new IllegalArgumentException("data cannot be null or empty");
         }
@@ -59,8 +60,9 @@ class Person{
     public static void main(String[] args) {
         Person person = new Person();
         person.setName("demus");
-        byte[] serialize = ProtostuffUtil.serialize(person);
-        Person deserialize = ProtostuffUtil.deserialize(serialize, Person.class);
-        System.out.println(deserialize.getName());
+        Serializer serializer = new ProtostuffUtil();
+        byte[] serialize = serializer.serialize(person);
+        Person deserialize = serializer.deserialize(serialize, Person.class);
+        System.out.print(deserialize.getName());
     }
 }

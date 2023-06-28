@@ -1,4 +1,4 @@
-package com.demus.server;
+package com.demus.server.thread;
 
 
 import java.util.HashMap;

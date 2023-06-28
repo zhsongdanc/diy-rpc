@@ -79,7 +79,7 @@ public class ClientMain {
     }
 
     private static byte[] serializeReq(Request request) {
-        return ProtostuffUtil.serialize(request);
+        return new ProtostuffUtil().serialize(request);
     }
 
 }

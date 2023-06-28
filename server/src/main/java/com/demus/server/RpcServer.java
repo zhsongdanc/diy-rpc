@@ -3,6 +3,8 @@ package com.demus.server;
 import com.demus.common.annota.MyService;
 import com.demus.common.annota.MyServiceScan;
 import com.demus.common.util.ReflectUtil;
+import com.demus.server.provider.ServiceProvider;
+import com.demus.server.register.ServiceRegistry;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Set;
@@ -21,7 +23,7 @@ public abstract class RpcServer {
     protected abstract void start() throws Exception;
 
     public void publishService(Object service, String serviceName) {
-
+        serviceProvider.addServiceProvider(serviceName, service);
     }
 
     // 扫描服务放进去

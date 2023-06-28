@@ -1,4 +1,4 @@
-package com.demus.server;
+package com.demus.server.thread;
 
 import com.demus.common.catalina.Request;
 import com.demus.common.serialize.protostuff.ProtostuffUtil;
@@ -79,7 +79,7 @@ public class ProcessRequestTask implements Runnable{
         while ((len = inputStream.read(buffer)) != -1) {
             baos.write(buffer, 0, len);
         }
-        return ProtostuffUtil.deserialize(baos.toByteArray(), Request.class);
+        return new ProtostuffUtil().deserialize(baos.toByteArray(), Request.class);
 
     }
 

@@ -1,4 +1,4 @@
-package com.demus.server;
+package com.demus.server.provider;
 
 import com.demus.common.annota.MyServiceScan;
 import com.demus.common.util.ReflectUtil;

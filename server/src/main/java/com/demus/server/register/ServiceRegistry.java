@@ -1,4 +1,4 @@
-package com.demus.server;
+package com.demus.server.register;
 
 /*
  * @Author: demussong
@@ -7,7 +7,7 @@ package com.demus.server;
  */
 public interface ServiceRegistry {
 
-    public void registerService(String serviceName, String url);
+    public void registerService(String serviceName, String ip, int port);
 
     public String getService(String serviceName);
 

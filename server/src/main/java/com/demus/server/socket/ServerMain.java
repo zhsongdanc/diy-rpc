@@ -1,4 +1,4 @@
-package com.demus.server;
+package com.demus.server.socket;
 
 import com.demus.common.annota.MyServiceScan;
 import com.demus.server.thread.ProcessRequestTask;

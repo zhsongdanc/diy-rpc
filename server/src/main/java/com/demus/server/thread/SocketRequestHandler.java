@@ -33,7 +33,7 @@ public class SocketRequestHandler implements Runnable{
     @Override
     public void run() {
         try(InputStream inputStream = socket.getInputStream(); OutputStream outputStream = socket.getOutputStream()) {
-            RpcRequest request = ObjectReader.read(inputStream);
+            RpcRequest request = (RpcRequest) ObjectReader.read(inputStream);
             RpcResponse<Object> response = this.requestHandler.handle(request);
             ObjectReader.write(outputStream, response);
 

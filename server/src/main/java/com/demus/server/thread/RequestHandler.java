@@ -5,6 +5,8 @@ import com.demus.common.catalina.RpcResponse;
 import com.demus.server.provider.ServiceProvider;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
+import com.demus.server.provider.ServiceProviderImpl;
 import lombok.extern.slf4j.Slf4j;
 
 /*
@@ -14,17 +16,19 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class RequestHandler {
-    private ServiceProvider serviceProvider;
+    private static ServiceProvider serviceProvider;
 
-    public RequestHandler(ServiceProvider serviceProvider) {
-        this.serviceProvider = serviceProvider;
+    static {
+        serviceProvider = new ServiceProviderImpl();
+    }
+
+    public RequestHandler() {
     }
 
     // TODO ? 这里有可能一次接收同一个客户端的多个请求吗？
     public RpcResponse<Object> handle(RpcRequest request) {
         Object invokeResult = invokeTargetMethod(request);
         return RpcResponse.success(request.getReqId(), invokeResult);
-
     }
 
     public Object invokeTargetMethod(RpcRequest request) {

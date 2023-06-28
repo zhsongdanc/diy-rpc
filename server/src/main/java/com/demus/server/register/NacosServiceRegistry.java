@@ -9,13 +9,13 @@ import java.net.URL;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.CollectionUtils;
 
 /*
  * @Author: demussong
  * @Description:
  * @Date: 2023/6/28 11:20
  */
+// TODO 服务关闭时注销服务
 @Slf4j
 public class NacosServiceRegistry implements ServiceRegistry{
 
@@ -51,7 +51,7 @@ public class NacosServiceRegistry implements ServiceRegistry{
             log.error("failed to find service ,serviceName:{}", serviceName);
             e.printStackTrace();
         }
-        if (CollectionUtils.isEmpty(instances)) {
+        if (instances == null || instances.size() == 0) {
             log.error("no such service, serviceName is :{}", serviceName);
             throw new RuntimeException("no such service");
         }

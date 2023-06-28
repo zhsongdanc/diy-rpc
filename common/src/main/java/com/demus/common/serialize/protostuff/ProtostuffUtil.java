@@ -32,15 +32,15 @@ public class ProtostuffUtil implements Serializer {
      * @param clazz 要反序列化的对象类型
      * @return 反序列化后的对象
      */
-    public  <T> T deserialize(byte[] data, Class<T> clazz) {
+    public  Object deserialize(byte[] data, Class<?> clazz) {
         if (data == null || data.length == 0) {
             throw new IllegalArgumentException("data cannot be null or empty");
         }
         if (clazz == null) {
             throw new IllegalArgumentException("clazz cannot be null");
         }
-        RuntimeSchema<T> schema = RuntimeSchema.createFrom(clazz);
-        T obj = schema.newMessage();
+        RuntimeSchema schema = RuntimeSchema.createFrom(clazz);
+        Object obj = schema.newMessage();
         ProtostuffIOUtil.mergeFrom(data, obj, schema);
         return obj;
     }
@@ -62,7 +62,7 @@ class Person{
         person.setName("demus");
         Serializer serializer = new ProtostuffUtil();
         byte[] serialize = serializer.serialize(person);
-        Person deserialize = serializer.deserialize(serialize, Person.class);
+        Person deserialize = (Person) serializer.deserialize(serialize, Person.class);
         System.out.print(deserialize.getName());
     }
 }

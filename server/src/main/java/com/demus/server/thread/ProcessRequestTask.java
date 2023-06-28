@@ -35,7 +35,7 @@ public class ProcessRequestTask implements Runnable{
 
             Request request = null;
             try {
-                request = deserializeRequest(socket.getInputStream());
+                request = (Request) deserializeRequest(socket.getInputStream());
                 log.info("read content from client: {}", request.getRMethod().getMethodName());
             } catch (Exception e) {
                 e.printStackTrace();
@@ -72,14 +72,14 @@ public class ProcessRequestTask implements Runnable{
         outputStream.write(s.getBytes(StandardCharsets.UTF_8),0, s.length());
     }
 
-    private Request deserializeRequest(InputStream inputStream) throws Exception{
+    private Object deserializeRequest(InputStream inputStream) throws Exception{
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         byte[] buffer = new byte[512];
         int len = 0;
         while ((len = inputStream.read(buffer)) != -1) {
             baos.write(buffer, 0, len);
         }
-        return new ProtostuffUtil().deserialize(baos.toByteArray(), Request.class);
+        return new ProtostuffUtil().deserialize(baos.toByteArray(), Object.class);
 
     }
 

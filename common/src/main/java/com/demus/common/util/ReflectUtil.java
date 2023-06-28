@@ -25,7 +25,7 @@ public class ReflectUtil {
 
     public static Set<Class<?>> getAllClass(String basePackage) {
         Set<Class<?>> res = new HashSet<>();
-        String dirName = basePackage.replaceAll(".", "/");
+        String dirName = basePackage.replace(".", "/");
         Enumeration<URL> resources = null;
         try {
             resources = Thread.currentThread().getContextClassLoader().getResources(dirName);
@@ -45,7 +45,7 @@ public class ReflectUtil {
                         if (name.startsWith(basePackage)) {
                             int idx = name.lastIndexOf("/");
                             if (idx != -1 && name.endsWith(".class")) {
-                                String curPackageName = name.substring(0, idx).replaceAll("/", ".");
+                                String curPackageName = name.substring(0, idx).replace("/", ".");
                                 String className = name.substring(idx + 1, name.length() - 6);
                                 Class<?> curClass = Thread.currentThread().getContextClassLoader().loadClass(curPackageName + "." + className);
                                 res.add(curClass);
@@ -78,7 +78,7 @@ public class ReflectUtil {
                 findAndAddAllClasses(file.getAbsolutePath(), packageName + "." + file.getName(), res);
             } else {
                 try {
-                    Class<?> curClass = Thread.currentThread().getContextClassLoader().loadClass(packageName + "." + file.getName());
+                    Class<?> curClass = Thread.currentThread().getContextClassLoader().loadClass(packageName + "." + file.getName().substring(0, file.getName().length() -6));
                     res.add(curClass);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();

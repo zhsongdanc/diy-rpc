@@ -14,7 +14,7 @@ public interface Serializer {
 
     public <T> byte[] serialize(T obj);
 
-    public <T> T deserialize(byte[] bytes, Class<T> clazz);
+    public Object deserialize(byte[] bytes, Class<?> clazz);
 
 
     public static Serializer getByCode(int code) {

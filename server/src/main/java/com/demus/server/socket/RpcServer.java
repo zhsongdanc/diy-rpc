@@ -1,4 +1,4 @@
-package com.demus.server;
+package com.demus.server.socket;
 
 import com.demus.common.annota.MyService;
 import com.demus.common.annota.MyServiceScan;
@@ -16,6 +16,9 @@ import java.util.Set;
  */
 @Slf4j
 public abstract class RpcServer {
+
+    protected String host;
+    protected int port;
     protected ServiceProvider serviceProvider;
     protected ServiceRegistry serviceRegistry;
 
@@ -24,6 +27,7 @@ public abstract class RpcServer {
 
     public void publishService(Object service, String serviceName) {
         serviceProvider.addServiceProvider(serviceName, service);
+        serviceRegistry.registerService(serviceName, host, port);
     }
 
     // 扫描服务放进去
@@ -46,7 +50,7 @@ public abstract class RpcServer {
         if (basePackage == null || ("").equals(basePackage)) {
             basePackage = mainPackageName;
         }
-        Set<Class<?>> allClass = ReflectUtil.getAllClass(mainClassName);
+        Set<Class<?>> allClass = ReflectUtil.getAllClass(basePackage);
         for (Class<?> clazz : allClass) {
             Object service = null;
             try {

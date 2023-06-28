@@ -1,4 +1,4 @@
-package com.demus.common.inter.impl;
+package com.demus.server.socket;
 
 import com.demus.common.annota.MyService;
 import com.demus.common.inter.Phone;

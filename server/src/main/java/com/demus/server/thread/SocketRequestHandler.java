@@ -41,6 +41,7 @@ public class SocketRequestHandler implements Runnable{
             }catch (RuntimeException e){
 
                 RpcResponse<Exception> response = new RpcResponse<>();
+                response.setStatus(500);
                 ObjectReader.write(outputStream, response);
             }
 

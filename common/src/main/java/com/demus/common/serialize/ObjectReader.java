@@ -64,6 +64,8 @@ public class ObjectReader {
         byte[] serialize = Serializer.getByCode(Serializer.Protostuff).serialize(obj);
 
         outputStream.write(intToByte(serialize.length));
+        outputStream.write(serialize);
+        outputStream.flush();
 
     }
 

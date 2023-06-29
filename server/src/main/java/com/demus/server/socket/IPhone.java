@@ -1,7 +1,7 @@
 package com.demus.server.socket;
 
 import com.demus.common.annota.MyService;
-import com.demus.common.inter.Phone;
+import com.demus.common.pojo.Phone;
 
 /*
  * @Author: demussong
@@ -12,7 +12,8 @@ import com.demus.common.inter.Phone;
 public class IPhone implements Phone {
 
     @Override
-    public void call(String name) {
-        System.out.println("call" + name  + "by iphone!");
+    public String call(String name) {
+        System.out.println("call " + name  + " by iphone!");
+        return "call " + name  + " by iphone!";
     }
 }

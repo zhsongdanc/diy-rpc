@@ -29,7 +29,7 @@ public class SocketRpcClient extends RpcClient{
             RpcRequest request = RpcRequest.builder()
                     .reqId("42009834")
                     .methodName("call")
-                    .interfaceName("Phone")
+                    .interfaceName("com.demus.common.pojo.Phone")
                     .parameters(new Object[]{"demus"})
                     .parameterTypes(new Class[]{String.class})
                     .build();

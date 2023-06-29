@@ -2,7 +2,7 @@ package com.demus.client.socket;
 
 import com.demus.common.catalina.RMethod;
 import com.demus.common.catalina.Request;
-import com.demus.common.inter.Phone;
+import com.demus.common.pojo.Phone;
 import com.demus.common.serialize.protostuff.ProtostuffUtil;
 import java.io.IOException;
 import java.io.OutputStream;

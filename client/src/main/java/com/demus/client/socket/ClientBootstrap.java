@@ -9,6 +9,6 @@ public class ClientBootstrap {
 
     public static void main(String[] args) {
         RpcClient rpcClient = new SocketRpcClient();
-        rpcClient.start("com.demus.common.inter.Phone");
+        rpcClient.start("com.demus.common.pojo.Phone");
     }
 }

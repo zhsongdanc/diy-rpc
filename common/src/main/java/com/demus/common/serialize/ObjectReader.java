@@ -67,6 +67,10 @@ public class ObjectReader {
 
     }
 
+    public static void exception(OutputStream outputStream, Exception e) {
+
+    }
+
     public static int byteToInt(byte[] b) {
         return ((b[0] & 0xFF) << 24) +
                 ((b[1] & 0xFF) << 16) +

@@ -4,7 +4,7 @@ import com.demus.common.annota.MyService;
 import com.demus.common.annota.MyServiceScan;
 import com.demus.common.util.ReflectUtil;
 import com.demus.server.provider.ServiceProvider;
-import com.demus.server.register.ServiceRegistry;
+import com.demus.common.register.ServiceRegistry;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Set;
@@ -52,17 +52,18 @@ public abstract class RpcServer {
         }
         Set<Class<?>> allClass = ReflectUtil.getAllClass(basePackage);
         for (Class<?> clazz : allClass) {
-            Object service = null;
-            try {
-                service = clazz.newInstance();
-            } catch (InstantiationException e) {
-                log.error("反射生成对象错误");
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
+
             if (clazz.isAnnotationPresent(MyService.class)) {
                 String serviceName = clazz.getAnnotation(MyService.class).serviceName();
+                Object service = null;
+                try {
+                    service = clazz.newInstance();
+                } catch (InstantiationException e) {
+                    log.error("反射生成对象错误");
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
                 if ("".equals(serviceName)) {
                     for (Class<?> clazzInterface : clazz.getInterfaces()) {
                         publishService(service, clazzInterface.getName());

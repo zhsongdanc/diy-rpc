@@ -26,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ServerMain {
 
     public static void main(String[] args) throws  Exception{
-        RpcServer rpcServer = new SocketServer(9629);
+        RpcServer rpcServer = new SocketServer(9629, "localhost");
         rpcServer.start();
         int serverPort = 9629;
         ServerSocket ss = new ServerSocket(serverPort);

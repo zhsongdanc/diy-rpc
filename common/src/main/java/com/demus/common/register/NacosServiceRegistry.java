@@ -1,13 +1,11 @@
-package com.demus.server.register;
+package com.demus.common.register;
 
 import com.alibaba.nacos.api.exception.NacosException;
 import com.alibaba.nacos.api.naming.NamingFactory;
 import com.alibaba.nacos.api.naming.NamingService;
 import com.alibaba.nacos.api.naming.pojo.Instance;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.InetSocketAddress;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 
 /*
@@ -35,15 +33,15 @@ public class NacosServiceRegistry implements ServiceRegistry{
     public void registerService(String serviceName, String ip, int port) {
         try {
             namingService.registerInstance(serviceName, ip, port);
-            log.error("failed to register service:{}", serviceName);
+
         } catch (NacosException e) {
-            log.error("register service failed!");
+            log.error("failed to register service:{}", serviceName);
             e.printStackTrace();
         }
     }
 
     @Override
-    public String getService(String serviceName) {
+    public InetSocketAddress getService(String serviceName) {
         List<Instance> instances = null;
         try {
             instances = namingService.getAllInstances(serviceName);
@@ -58,9 +56,10 @@ public class NacosServiceRegistry implements ServiceRegistry{
         for (Instance instance : instances) {
             String ip = instance.getIp();
             int port = instance.getPort();
-            System.out.println("id = " + ip);
-            System.out.println("port = " + port);
-            return ip + port;
+            log.info("the address of service:{} is {}:{}", serviceName, ip, port);
+            InetSocketAddress inetSocketAddress = new InetSocketAddress(ip, port);
+
+            return inetSocketAddress;
         }
         return null;
     }

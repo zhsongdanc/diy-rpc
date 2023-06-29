@@ -3,8 +3,7 @@ package com.demus.server.socket;
 
 import com.demus.common.serialize.Serializer;
 import com.demus.server.provider.ServiceProviderImpl;
-import com.demus.server.register.NacosServiceRegistry;
-import com.demus.server.register.ServiceRegistry;
+import com.demus.common.register.NacosServiceRegistry;
 import com.demus.server.thread.RequestHandler;
 import com.demus.server.thread.SocketRequestHandler;
 import lombok.extern.slf4j.Slf4j;
@@ -22,12 +21,12 @@ import java.net.Socket;
 public class SocketServer extends RpcServer{
 
 
-    private int port;
     private RequestHandler requestHandler = new RequestHandler();
     private Serializer serializer;
 
-    public SocketServer(int port) throws IOException {
+    public SocketServer(int port, String host) throws IOException {
         this.port = port;
+        this.host = host;
         this.serviceProvider = new ServiceProviderImpl();
         this.serviceRegistry = new NacosServiceRegistry();
 

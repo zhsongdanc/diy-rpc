@@ -1,4 +1,4 @@
-package com.demus.server.register;
+package com.demus.common.register;
 
 /**
  * @description:

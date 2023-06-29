@@ -1,17 +1,13 @@
-package com.demus.client;
+package com.demus.client.socket;
 
 import com.demus.common.catalina.RMethod;
 import com.demus.common.catalina.Request;
 import com.demus.common.inter.Phone;
 import com.demus.common.serialize.protostuff.ProtostuffUtil;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 import java.util.Collections;
 import lombok.extern.slf4j.Slf4j;
 

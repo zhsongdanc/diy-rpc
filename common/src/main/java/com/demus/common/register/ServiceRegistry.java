@@ -1,4 +1,6 @@
-package com.demus.server.register;
+package com.demus.common.register;
+
+import java.net.InetSocketAddress;
 
 /*
  * @Author: demussong
@@ -9,6 +11,6 @@ public interface ServiceRegistry {
 
     public void registerService(String serviceName, String ip, int port);
 
-    public String getService(String serviceName);
+    public InetSocketAddress getService(String serviceName);
 
 }

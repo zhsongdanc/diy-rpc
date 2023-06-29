@@ -33,10 +33,16 @@ public class SocketRequestHandler implements Runnable{
     @Override
     public void run() {
         try(InputStream inputStream = socket.getInputStream(); OutputStream outputStream = socket.getOutputStream()) {
-            RpcRequest request = (RpcRequest) ObjectReader.read(inputStream);
-            RpcResponse<Object> response = this.requestHandler.handle(request);
-            ObjectReader.write(outputStream, response);
 
+            try {
+                RpcRequest request = (RpcRequest) ObjectReader.read(inputStream);
+                RpcResponse<Object> response = this.requestHandler.handle(request);
+                ObjectReader.write(outputStream, response);
+            }catch (RuntimeException e){
+
+                RpcResponse<Exception> response = new RpcResponse<>();
+                ObjectReader.write(outputStream, response);
+            }
 
         }catch (IOException e) {
             log.error("failed to handle request!");

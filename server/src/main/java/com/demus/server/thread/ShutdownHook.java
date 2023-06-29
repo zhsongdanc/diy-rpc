@@ -1,9 +1,5 @@
 package com.demus.server.thread;
 
-import com.alibaba.nacos.spring.util.NacosUtils;
-import com.demus.server.register.NacosUtil;
-import org.omg.SendingContext.RunTime;
-
 /**
  * @description:
  * @author: zhsong

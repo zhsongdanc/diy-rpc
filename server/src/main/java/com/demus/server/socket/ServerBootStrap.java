@@ -10,7 +10,7 @@ import com.demus.common.annota.MyServiceScan;
 @MyServiceScan
 public class ServerBootStrap {
     public static void main(String[] args) throws Exception{
-        RpcServer rpcServer = new SocketServer(8973);
+        RpcServer rpcServer = new SocketServer(8973, "localhost");
         rpcServer.start();
     }
 }

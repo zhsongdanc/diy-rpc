@@ -22,6 +22,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SocketRpcClient extends RpcClient{
 
+    private ServiceRegistry serviceRegistry = new NacosServiceRegistry();
+
     public void start(String serviceName) {
         ServiceRegistry serviceRegistry = new NacosServiceRegistry();
         InetSocketAddress clientAddr = serviceRegistry.getService(serviceName);
@@ -44,6 +46,24 @@ public class SocketRpcClient extends RpcClient{
             e.printStackTrace();
         }
 
+    }
+
+
+    public void send(RpcRequest request){
+        InetSocketAddress clientAddr = serviceRegistry.getService(request.getInterfaceName());
+
+        try(Socket socket = new Socket(clientAddr.getHostName(), clientAddr.getPort())) {
+
+            ObjectReader.write(socket.getOutputStream(), request);
+            RpcResponse rpcResponse = (RpcResponse)ObjectReader.read(socket.getInputStream());
+            log.info("get data from reqId:{}", rpcResponse.getReqId());
+            log.info("get data from status:{}", rpcResponse.getStatus());
+            log.info("get data from server:{}", rpcResponse.getData());
+
+        }catch (IOException e) {
+            log.error("client err!");
+            e.printStackTrace();
+        }
     }
 
 
